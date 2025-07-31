@@ -14,20 +14,20 @@ There are two actual ways of using async logger.
 
 1. Rely on singleton instance produced by this library, which is configured by
    environment variables (see Configuration section below)
-   
+
    In this case as simple as
    ~~~typescript
-   import logger from '@imqueue/async-async-logger';
-   
+   import logger from '@imqueue/async-logger';
+
    serviceOptions.logger = logger;
    ~~~
 
 2. Instantiate and configure async logger programmatically:
    ~~~typescript
-   import { Logger } from '@imqueue/async-async-logger';
-   
+   import { Logger } from '@imqueue/async-logger';
+
    const { name, version } = require('./package.json');
-   
+
    const logger = new Logger({
        transports: [{
            type: 'http',
@@ -48,7 +48,7 @@ There are two actual ways of using async logger.
            hostname: 'localhost'
        },
    });
-   
+
    serviceOptions.logger = logger;
    ~~~
 

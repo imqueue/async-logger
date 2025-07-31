@@ -45,9 +45,9 @@ export class Logger implements ILogger {
      */
     private static readonly console: ILogger = {
         log: (...args: any[]) => setTimeout(() => console.log(...args)),
-        info: (...args: any[]) => setTimeout(() => console.log(...args)),
-        warn: (...args: any[]) => setTimeout(() => console.log(...args)),
-        error: (...args: any[]) => setTimeout(() => console.log(...args)),
+        info: (...args: any[]) => setTimeout(() => console.info(...args)),
+        warn: (...args: any[]) => setTimeout(() => console.warn(...args)),
+        error: (...args: any[]) => setTimeout(() => console.error(...args)),
     };
 
     /**
