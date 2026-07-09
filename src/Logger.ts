@@ -35,21 +35,21 @@ import {
 import { TransportOptions } from './TransportOptions';
 
 export interface AsyncLoggerOptions {
-    transports: TransportOptions[],
-    metadata: JsonObject,
+    transports: TransportOptions[];
+    metadata: JsonObject;
 }
 
 /**
  * Class Logger
  */
 export class Logger implements ILogger {
-
     /**
      * Asynchronous console async-logger
      *
      * @type {ILogger}
      */
     private static readonly console: ILogger = {
+        // oxlint-disable-next-line no-console -- forwarding is the API here
         log: (...args: any[]) => setTimeout(() => console.log(...args)),
         info: (...args: any[]) => setTimeout(() => console.info(...args)),
         warn: (...args: any[]) => setTimeout(() => console.warn(...args)),
@@ -75,7 +75,7 @@ export class Logger implements ILogger {
      *
      * @type {WinstonLogger}
      */
-    private readonly logger: WinstonLogger;
+    private readonly logger?: WinstonLogger;
 
     /**
      * Logger Ctor
@@ -167,7 +167,10 @@ export class Logger implements ILogger {
 
             const transport = getTransport(options.type, options.options);
 
-            this.logger.add(transport);
+            // the constructor always creates the winston logger before
+            // calling setupLogger(), the optional chaining only satisfies
+            // strict property-initialization analysis
+            this.logger?.add(transport);
         }
     }
 }

@@ -1,21 +1,24 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "es2023",
+    "lib": ["es2023"],
+    "moduleDetection": "force",
+
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+
+    "isolatedModules": true,
+
     "declaration": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "removeComments": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "moduleResolution": "node",
     "sourceMap": true,
     "inlineSources": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "target": "es2017",
-    "lib": [
-      "dom",
-      "es2017"
-    ]
+    "removeComments": false,
+    "newLine": "lf",
+
+    "strict": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true
   }
 }
