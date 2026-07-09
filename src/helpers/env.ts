@@ -32,7 +32,7 @@ const RX_VERSION = /%version/g;
  *
  * @returns {name: string, value: string} - return package name and version
  */
-export function pkg(): { name: string; version: string; } {
+export function pkg(): { name: string; version: string } {
     const pkgPath = resolve(process.cwd(), 'package.json');
     const { name, version } = exists(pkgPath)
         ? require(pkgPath)
@@ -50,14 +50,17 @@ export function transportsConfig(): TransportOptions[] {
     const { name, version } = pkg();
 
     try {
-        return JSON.parse((process.env.LOGGER_TRANSPORTS || '[]')
-            .replace(RX_NAME, name)
-            .replace(RX_VERSION, version)
+        return JSON.parse(
+            (process.env.LOGGER_TRANSPORTS || '[]')
+                .replace(RX_NAME, name)
+                .replace(RX_VERSION, version),
         );
     } catch (err) {
-        throw new TypeError(`Logger: can not parse transports config: ${
-            err.stack ? err.stack : err.message
-        }`);
+        throw new TypeError(
+            `Logger: can not parse transports config: ${
+                err instanceof Error ? err.stack || err.message : String(err)
+            }`,
+        );
     }
 }
 
@@ -70,13 +73,16 @@ export function defaultMetadata(): JsonObject {
     const { name, version } = pkg();
 
     try {
-        return JSON.parse((process.env.LOGGER_METADATA || '{}')
-            .replace(RX_NAME, name)
-            .replace(RX_VERSION, version)
+        return JSON.parse(
+            (process.env.LOGGER_METADATA || '{}')
+                .replace(RX_NAME, name)
+                .replace(RX_VERSION, version),
         );
     } catch (err) {
-        throw new TypeError(`Logger: can not parse metadata: ${
-            err.stack ? err.stack : err.message
-        }`);
+        throw new TypeError(
+            `Logger: can not parse metadata: ${
+                err instanceof Error ? err.stack || err.message : String(err)
+            }`,
+        );
     }
 }

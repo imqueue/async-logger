@@ -46,3 +46,6 @@ tslint.json
 bin/
 .git/
 examples/
+scripts/
+.oxlintrc.json
+.oxfmtrc.json
