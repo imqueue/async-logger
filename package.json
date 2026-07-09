@@ -38,7 +38,7 @@
   "author": "imqueue.com <support@imqueue.com> (https://imqueue.com)",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "@imqueue/core": "^3.1.0",
+    "@imqueue/core": "^3.1.1",
     "winston": "^3.19.0",
     "winston-transport": "^4.9.0"
   },
