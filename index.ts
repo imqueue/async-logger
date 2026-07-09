@@ -19,9 +19,9 @@
  * purchase a proprietary commercial license. Please contact us at
  * <support@imqueue.com> to get commercial licensing options.
  */
-import { Logger } from './src';
+import { Logger } from './src/index.js';
 
-export * from './src';
+export * from './src/index.js';
 
 // noinspection JSUnusedGlobalSymbols
 export default new Logger();

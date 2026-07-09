@@ -26,7 +26,7 @@ import assert from 'node:assert/strict';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { transports } from 'winston';
-import { getTransport } from '../..';
+import { getTransport } from '../../index.js';
 
 describe('helpers/getTransport()', () => {
     it('should be a function', () => {

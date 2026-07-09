@@ -23,12 +23,15 @@
  */
 import { afterEach, describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { defaultMetadata, pkg, transportsConfig } from '../..';
+import { defaultMetadata, pkg, transportsConfig } from '../../index.js';
 
 // the package manifest of this repository, as pkg() should see it when the
 // process runs from the repository root
-const self = require('../../package.json');
+const self = JSON.parse(
+    readFileSync(new URL('../../package.json', import.meta.url), 'utf8'),
+);
 
 describe('helpers/pkg()', () => {
     it('should return name and version of the current package', () => {

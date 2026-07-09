@@ -19,7 +19,7 @@
  * purchase a proprietary commercial license. Please contact us at
  * <support@imqueue.com> to get commercial licensing options.
  */
-import { LoggerOptions } from 'winston';
+import { type LoggerOptions } from 'winston';
 
 /**
  * Interface IConfig

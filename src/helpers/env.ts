@@ -19,10 +19,10 @@
  * purchase a proprietary commercial license. Please contact us at
  * <support@imqueue.com> to get commercial licensing options.
  */
-import { JsonObject } from '@imqueue/core';
+import { type JsonObject } from '@imqueue/core';
 import { resolve } from 'path';
-import { existsSync as exists } from 'fs';
-import { TransportOptions } from '../TransportOptions';
+import { existsSync as exists, readFileSync } from 'fs';
+import { type TransportOptions } from '../TransportOptions.js';
 
 const RX_NAME = /%name/g;
 const RX_VERSION = /%version/g;
@@ -35,7 +35,7 @@ const RX_VERSION = /%version/g;
 export function pkg(): { name: string; version: string } {
     const pkgPath = resolve(process.cwd(), 'package.json');
     const { name, version } = exists(pkgPath)
-        ? require(pkgPath)
+        ? JSON.parse(readFileSync(pkgPath, 'utf8'))
         : { name: 'logger', version: '' };
 
     return { name, version };

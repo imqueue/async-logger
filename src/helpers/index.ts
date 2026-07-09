@@ -19,6 +19,6 @@
  * purchase a proprietary commercial license. Please contact us at
  * <support@imqueue.com> to get commercial licensing options.
  */
-export * from './env';
-export * from './message';
-export * from './transport';
+export * from './env.js';
+export * from './message.js';
+export * from './transport.js';
