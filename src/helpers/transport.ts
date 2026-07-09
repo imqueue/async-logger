@@ -20,11 +20,11 @@
  * <support@imqueue.com> to get commercial licensing options.
  */
 import { transports } from 'winston';
-import * as Transport from 'winston-transport';
-import {
+import type Transport from 'winston-transport';
+import type {
     FileTransportOptions,
     HttpTransportOptions,
-} from 'winston/lib/winston/transports';
+} from 'winston/lib/winston/transports/index.js';
 
 /**
  * Used for get configured transport by type

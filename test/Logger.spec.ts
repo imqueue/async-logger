@@ -25,7 +25,7 @@ import { describe, it, type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import logger, { Logger } from '..';
+import logger, { Logger } from '../index.js';
 
 const LOG_FILE = join(tmpdir(), 'imq-async-logger-test.log');
 

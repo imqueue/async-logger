@@ -23,7 +23,7 @@
  */
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildMessage } from '../..';
+import { buildMessage } from '../../index.js';
 
 describe('helpers/buildMessage()', () => {
     it('should be a function', () => {

@@ -19,20 +19,20 @@
  * purchase a proprietary commercial license. Please contact us at
  * <support@imqueue.com> to get commercial licensing options.
  */
-import { ILogger, JsonObject } from '@imqueue/core';
+import { type ILogger, type JsonObject } from '@imqueue/core';
 import {
     createLogger,
     format,
     Logger as WinstonLogger,
-    LoggerOptions,
+    type LoggerOptions,
 } from 'winston';
 import {
     buildMessage,
     defaultMetadata,
     getTransport,
     transportsConfig,
-} from './helpers';
-import { TransportOptions } from './TransportOptions';
+} from './helpers/index.js';
+import { type TransportOptions } from './TransportOptions.js';
 
 export interface AsyncLoggerOptions {
     transports: TransportOptions[];
