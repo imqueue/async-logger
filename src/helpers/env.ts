@@ -19,7 +19,7 @@
  * purchase a proprietary commercial license. Please contact us at
  * <support@imqueue.com> to get commercial licensing options.
  */
-import { type JsonObject } from '@imqueue/core';
+import { type JsonObject } from '../types.js';
 import { resolve } from 'path';
 import { existsSync as exists, readFileSync } from 'fs';
 import { type TransportOptions } from '../TransportOptions.js';

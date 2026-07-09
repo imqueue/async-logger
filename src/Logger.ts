@@ -19,7 +19,7 @@
  * purchase a proprietary commercial license. Please contact us at
  * <support@imqueue.com> to get commercial licensing options.
  */
-import { type ILogger, type JsonObject } from '@imqueue/core';
+import { type ILogger, type JsonObject } from './types.js';
 import {
     createLogger,
     format,

@@ -23,5 +23,4 @@ import { Logger } from './src/index.js';
 
 export * from './src/index.js';
 
-// noinspection JSUnusedGlobalSymbols
 export default new Logger();

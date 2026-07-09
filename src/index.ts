@@ -19,6 +19,7 @@
  * purchase a proprietary commercial license. Please contact us at
  * <support@imqueue.com> to get commercial licensing options.
  */
+export * from './types.js';
 export * from './helpers/index.js';
 export * from './TransportOptions.js';
 export * from './Logger.js';
