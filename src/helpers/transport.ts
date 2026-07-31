@@ -27,12 +27,17 @@ import type {
 } from 'winston/lib/winston/transports/index.js';
 
 /**
- * Used for get configured transport by type
+ * Constructs a winston transport of the named type.
  *
- * @param {string} type - transport type
- * @param {FileTransportOptions | HttpTransportOptions} options -
- *   options for configure transport
- * @returns {Transport}
+ * @remarks
+ * Only `'file'` and `'http'` are supported. Anything else returns nothing —
+ * despite the declared return type, which is a `Transport` cast rather than a
+ * guarantee. {@link Logger} checks for that and reports the offending type; a
+ * direct caller must check too.
+ *
+ * @param type - `'file'` or `'http'`
+ * @param options - options for the winston transport constructor
+ * @returns the transport, or nothing if the type is not recognised
  */
 export function getTransport(
     type: string,
