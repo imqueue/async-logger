@@ -22,10 +22,16 @@
 import { format } from 'util';
 
 /**
- * Format message like console log
+ * Renders `console.log`-style arguments into the single string a transport
+ * record needs, applying `util.format` so `%s`/`%d`/`%j` placeholders and object
+ * inspection behave exactly as they do on the console.
  *
- * @param {...*[]} args
- * @returns {string}
+ * @remarks
+ * MUTATES the array it is given — the first element is shifted off to serve as
+ * the format string. Pass a copy if you need the original afterwards.
+ *
+ * @param args - the logging arguments, first one treated as the format string
+ * @returns the formatted message
  */
 export function buildMessage(args: any[]): string {
     return format(args.shift(), ...args);

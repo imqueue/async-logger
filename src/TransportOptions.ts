@@ -22,10 +22,46 @@
 import { type LoggerOptions } from 'winston';
 
 /**
- * Interface IConfig
+ * One transport declaration — the shape of each element in the
+ * `LOGGER_TRANSPORTS` JSON array.
+ *
+ * @example
+ * ```json
+ * {
+ *     "type": "http",
+ *     "options": {
+ *         "ssl": true,
+ *         "port": 443,
+ *         "host": "http-intake.logs.datadoghq.com",
+ *         "path": "/v1/input/<API_KEY>"
+ *     },
+ *     "enabled": true
+ * }
+ * ```
  */
 export interface TransportOptions {
+    /**
+     * Which transport to create: `'file'` or `'http'`. Any other value is
+     * rejected at construction time.
+     */
     type: string;
+
+    /**
+     * Options handed to the winston transport constructor — `filename` for
+     * `file`, `host`/`port`/`path`/`ssl` for `http`.
+     *
+     * @remarks
+     * Typed as winston's `LoggerOptions` for historical reasons, which is wider
+     * than what is actually accepted here. Treat it as `FileTransportOptions` or
+     * `HttpTransportOptions` according to `type`; the declared type will not
+     * catch a mismatch for you.
+     */
     options: LoggerOptions;
+
+    /**
+     * Whether to attach this transport. A `false` entry is skipped entirely, so
+     * a transport can be left in the config and switched off per environment
+     * rather than deleted.
+     */
     enabled: boolean;
 }

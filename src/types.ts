@@ -28,7 +28,12 @@
  */
 
 /**
- * Represents any JSON-serializable value
+ * Any value that survives `JSON.stringify` unchanged.
+ *
+ * @remarks
+ * A structural copy of the type in `@imqueue/core`, declared here so the logger
+ * needs no runtime dependency on the queue library. The shapes match exactly, so
+ * values remain assignable in both directions.
  */
 export type AnyJson =
     | boolean
@@ -40,46 +45,35 @@ export type AnyJson =
     | JsonObject;
 
 /**
- * Represents JSON serializable object
+ * A JSON object — string keys, {@link AnyJson} values. This is the type of the
+ * logger's default metadata.
  */
 export interface JsonObject {
     [key: string]: AnyJson;
 }
 
-/**
- * Represents JSON-serializable array
- */
+/** A JSON array — any number of {@link AnyJson} values. */
 export interface JsonArray extends Array<AnyJson> {}
 
 /**
- * Logger interface
+ * The logger contract shared across `@imqueue` — the four console methods, and
+ * nothing else.
+ *
+ * @remarks
+ * Deliberately console-shaped, so `console` itself satisfies it and any
+ * `@imqueue` component taking a logger accepts either that or a {@link Logger}
+ * with no adapter. Implement it to route the framework's own output elsewhere.
  */
 export interface ILogger {
-    /**
-     * Log level function
-     *
-     * @param {...unknown[]} args
-     */
+    /** Logs at the default level. */
     log(...args: unknown[]): void;
 
-    /**
-     * Info level function
-     *
-     * @param {...unknown[]} args
-     */
+    /** Logs at INFO level. */
     info(...args: unknown[]): void;
 
-    /**
-     * Warning level function
-     *
-     * @param {...unknown[]} args
-     */
+    /** Logs at WARN level. */
     warn(...args: unknown[]): void;
 
-    /**
-     * Error level function
-     *
-     * @param {...unknown[]} args
-     */
+    /** Logs at ERROR level. */
     error(...args: unknown[]): void;
 }

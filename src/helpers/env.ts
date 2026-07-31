@@ -28,9 +28,17 @@ const RX_NAME = /%name/g;
 const RX_VERSION = /%version/g;
 
 /**
- * Retrieve package name and version from package.json of running service
+ * Reads the running service's own name and version, used to expand the `%name`
+ * and `%version` placeholders in the logger environment variables.
  *
- * @returns {name: string, value: string} - return package name and version
+ * @remarks
+ * Resolved from `package.json` in the process's CURRENT WORKING DIRECTORY, not
+ * from this package's location. A service started from a different directory
+ * therefore reports whatever it finds there, and one started somewhere with no
+ * `package.json` falls back to `{ name: 'logger', version: '' }` rather than
+ * failing.
+ *
+ * @returns the service name and version, or the fallback pair
  */
 export function pkg(): { name: string; version: string } {
     const pkgPath = resolve(process.cwd(), 'package.json');
@@ -42,9 +50,17 @@ export function pkg(): { name: string; version: string } {
 }
 
 /**
- * Used for retrieve transport config from environment variables
+ * Parses the transport declarations out of `LOGGER_TRANSPORTS`, expanding
+ * `%name` and `%version` first.
  *
- * @returns {TransportOptions[]}
+ * @remarks
+ * An unset variable yields an empty array, which the {@link Logger} treats as
+ * console-only rather than as an error — the normal local-development case.
+ * Malformed JSON, by contrast, throws: a config typo should fail loudly at
+ * start-up rather than silently drop a production log destination.
+ *
+ * @returns the declared transports, or an empty array when unset
+ * @throws TypeError if the variable is set but not parseable as JSON
  */
 export function transportsConfig(): TransportOptions[] {
     const { name, version } = pkg();
@@ -65,9 +81,16 @@ export function transportsConfig(): TransportOptions[] {
 }
 
 /**
- * Returns default metadata, configured by environment variables
+ * Parses the default record metadata out of `LOGGER_METADATA`, expanding `%name`
+ * and `%version` first.
  *
- * @returns {JsonObject}
+ * @remarks
+ * These fields are attached to every record sent to a transport — a source tag,
+ * an environment name, a hostname — and are what makes records from several
+ * services distinguishable at the collector. Console output is unaffected.
+ *
+ * @returns the parsed metadata, or an empty object when unset
+ * @throws TypeError if the variable is set but not parseable as JSON
  */
 export function defaultMetadata(): JsonObject {
     const { name, version } = pkg();

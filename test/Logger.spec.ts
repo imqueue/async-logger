@@ -89,6 +89,19 @@ describe('Logger', () => {
         );
     });
 
+    it('should name the offending type on an unknown transport', () => {
+        assert.throws(
+            () =>
+                new Logger({
+                    metadata: {},
+                    transports: [
+                        { type: 'syslog', enabled: true, options: {} as any },
+                    ],
+                }),
+            { name: 'TypeError', message: /unknown transport type "syslog"/ },
+        );
+    });
+
     for (const [method, consoleMethod] of [
         ['log', 'log'],
         ['info', 'info'],
